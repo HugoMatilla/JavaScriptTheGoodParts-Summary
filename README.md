@@ -1,4 +1,4 @@
-#2.Grammar
+# 2.Grammar
 ## White Space
 ![alt text][space]
 ## Name
@@ -22,7 +22,7 @@ Names are used for statements, variables, parameters, property names, operators,
 | do       | import     | short      | while        |
 | double   | in         | static     | with         |
 
-### #Avoid also these ones
+#### Avoid also these ones
 
 | alert              | frames             | outerHeight    |
 | all                | frameRate          | outerWidth     |
@@ -62,7 +62,7 @@ Names are used for statements, variables, parameters, property names, operators,
 | forms              | opener             | valueOf        |
 | frame              | option             | window         |
 
-And these
+#### And these
 
 | onbeforeunload | ondragdrop | onkeyup     | onmouseover |
 | onblur         | onerror    | onload      | onmouseup   |
@@ -192,7 +192,7 @@ Invocation causes the execution of a function value.
 specify a property or element of an object or array
 ![alt text][refinement]
 
-##Literals
+## Literals
 ![alt text][literal]
 ### Object Literal
 ![alt text][object-literal]
@@ -1174,14 +1174,6 @@ Add Matix
 	// Make a 4 * 4 matrix filled with zeros.
 	var myMatrix = Array.matrix(4, 4, 0);
 ```
-
-
-
-##XXX
-![alt text][XXX]
-##XXX
-![alt text][XXX]
-
 
 [block]: http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ad02.png
 [break]: http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ad03.png
