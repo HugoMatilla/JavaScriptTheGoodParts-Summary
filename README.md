@@ -7,7 +7,7 @@ Names are used for statements, variables, parameters, property names, operators,
 
 ### Reserved Words
 | 		   |            |            |              |
-| -------- | ---------- | ---------- | ------------ |
+| -------- | ---------- | ---------- | ------------ |  
 | abstract | else       | instanceof | super        |
 | boolean  | enum       | int        | switch       |
 | break    | export     | interface  | synchronized |
@@ -26,6 +26,8 @@ Names are used for statements, variables, parameters, property names, operators,
 
 #### Avoid also these ones
 
+| 		             |                    |                |             
+| ------------------ | ------------------ | -------------- |  
 | alert              | frames             | outerHeight    |
 | all                | frameRate          | outerWidth     |
 | anchor             | function           | packages       |
@@ -66,6 +68,8 @@ Names are used for statements, variables, parameters, property names, operators,
 
 #### And these
 
+| 		         |            |             |             |
+| -------------- | ---------- | ----------- | ----------- |  
 | onbeforeunload | ondragdrop | onkeyup     | onmouseover |
 | onblur         | onerror    | onload      | onmouseup   |
 | ondragdrop     | onfocus    | onmousedown | onreset     |
