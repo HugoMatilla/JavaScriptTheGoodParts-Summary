@@ -6,6 +6,8 @@ Names are used for statements, variables, parameters, property names, operators,
 ![alt text][name]
 
 ### Reserved Words
+| 		   |            |            |              |
+| -------- | ---------- | ---------- | ------------ |
 | abstract | else       | instanceof | super        |
 | boolean  | enum       | int        | switch       |
 | break    | export     | interface  | synchronized |
