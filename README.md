@@ -123,6 +123,33 @@
     - [`string.toLowerCase( )`](#stringtolowercase-)
     - [`string.toUpperCase( )`](#stringtouppercase-)
     - [`String.fromCharCode(char…)`](#stringfromcharcodechar)
+- [Awful Parts](#awful-parts)
+  - [Global Variables](#global-variables)
+  - [Scope](#scope-1)
+  - [Semicolon Insertion](#semicolon-insertion)
+  - [Reserved Words](#reserved-words-1)
+  - [Unicode](#unicode)
+  - [typeof](#typeof)
+  - [parseInt](#parseint)
+  - [+](#)
+  - [Floating Point](#floating-point)
+  - [NaN](#nan)
+  - [Phony Arrays](#phony-arrays)
+  - [Falsy Values](#falsy-values)
+  - [hasOwnProperty](#hasownproperty-function hasOwnProperty() { [native code] }1)
+  - [Object](#object-1)
+- [Bad Parts](#bad-parts)
+  - [==](#)
+  - [`with` Statement](#with-statement)
+  - [`eval`](#eval)
+  - [`continue` Statement](#continue-statement)
+  - [`switch` Fall Through](#switch-fall-through)
+  - [Block-less Statements](#block-less-statements)
+  - [`++` `--`](#---)
+  - [Bitwise Operators](#bitwise-operators)
+  - [The function Statement Versus the function Expression](#the-function-statement-versus-the-function-expression)
+  - [Typed Wrappers](#typed-wrappers)
+  - [`void`](#void)
 
 <!-- /TOC -->
 # 2.Grammar
@@ -1694,7 +1721,336 @@ var a = String.fromCharCode(67, 97, 116);
 // a is 'Cat'
 ```
 
+# Awful Parts
+## Global Variables
+A global variable is a variable that is visible in every scope.
 
+Because a global variable can be changed by any part of the program at any time, they can significantly complicate the behavior of the program.
+
+There are three ways to define global variables. 
+
+1. Place a var statement outside of any function:
+```js 
+var foo = value;
+```
+
+2. Add a property directly to the global object. ie:
+```js
+window.foo = value;
+```
+
+3. Use a variable without declaring it.
+```js
+foo = value;
+```
+JavaScript’s policy of making forgotten variables global creates bugs that can be very difficult to find.
+
+## Scope
+JavaScript uses the block syntax, but does not provide block scope: 
+
+_A variable declared in a block is visible everywhere in the function containing the block._
+
+Best practice is to declare all variables at the top of each function.
+
+## Semicolon Insertion
+JavaScript has a mechanism that tries to correct faulty programs by automatically inserting semicolons.
+
+Do not depend on this. It can mask more serious errors.
+
+```js
+return
+{
+  status: true
+};
+// returns undefined
+```
+
+```js
+return {
+  status: true
+};
+//returns an object
+```
+
+## Reserved Words
+The following words are reserved in JavaScript:
+
+`abstract boolean break byte case catch char class const continue debugger default
+delete do double else enum export extends false final finally float for function goto
+if implements import in instanceof int interface long native new null package private
+protected public return short static super switch synchronized this throw throws
+transient true try typeof var volatile void while with`
+
+They cannot be used to name variables or parameters.
+
+When reserved words are used as keys in object literals, they must be quoted.
+
+They cannot be used with the dot notation, so it is sometimes necessary to use the bracket notation instead.
+
+```js
+var method; // ok
+var class; // illegal
+object = {box: value}; // ok
+object = {case: value}; // illegal
+object = {'case': value}; // ok
+object.box = value; // ok
+object.case = value; // illegal
+object['case'] = value; // ok
+```
+
+## Unicode
+JavaScript’s characters are 16 bits. That is enough to cover the original 65,536 (which is now known as the Basic Multilingual Plane).
+
+Each of the remaining million characters can be represented as a pair of characters.
+
+Unicode considers the pair to be a single character. 
+
+JavaScript thinks the pair is two distinct characters.
+
+## typeof
+```js
+typeof null
+```
+returns `object`
+
+You can fix it with:
+```js
+if (my_value && typeof my_value === 'object') {
+  // my_value is an object or an array!
+}
+```
+
+Some implementations report that:
+```js
+typeof /a/
+```
+is `object`, and others say that it is `function`.
+
+## parseInt
+`parseInt` is a function that converts a string into an integer.
+
+`parseInt("16")` and `parseInt("16 tons")` produce the same result.
+
+If the first character of the string is 0, then the string is evaluated in base 8 instead of
+base 10.
+
+`parseInt("08")` and `parseInt("09")` produce 0 as their result.
+
+Fortunately, `parseInt` can take a `radix` parameter, so that `parseInt("08",10)` produces 8.
+
+Use always the **radix**
+
+## +
+The + operator can add or concatenate.
+
+Which one it does depends on the types of the parameters.
+
+If either operand is an empty string, it produces the other operand
+converted to a string.
+
+If both operands are numbers, it produces the sum. 
+
+Otherwise, it converts both operands to strings and concatenates them.
+
+
+## Floating Point
+Binary floating-point numbers are inept at handling decimal fractions, so 0.1 + 0.2 is not equal to 0.3.
+
+Use Integer aritmetic. ie: 1.05$ = 105/100 $
+
+## NaN
+The value NaN is a special quantity defined by IEEE 754. It stands for not a number, even though:
+```js
+typeof NaN === 'number' // true
+```
+The value can be produced by attempting to convert a string to a number when the string is not in the form of a number. For example:
+```js
++ '0' // 0
++ 'oops' // NaN
+```
+
+`NaN` is not equal to itself.
+```js
+NaN === NaN // false
+NaN !== NaN // true
+```
+`isNaN` function that can distinguish between numbers and `NaN`:
+```js
+isNaN(NaN) // true
+isNaN(0) // false
+isNaN('oops') // true
+isNaN('0') // false
+```
+
+You may want to define your own isNumber function:
+```js
+var isNumber = function isNumber(value) { 
+  return typeof value === 'number' && isFinite(value);
+}
+```
+## Phony Arrays
+Javascript arrays can be considerably worse than real arrays
+
+The typeof operator does not distinguish between arrays and objects. You need
+```js
+if (my_value && typeof my_value === 'object' && typeof my_value.length === 'number' && !(my_value.propertyIsEnumerable('length')) {
+  // my_value is truly an array!
+}
+```
+In any case, the test can still fail if the propertyIsEnumerable method is overridden.
+
+## Falsy Values
+JavaScript has a surprisingly large set of falsy values
+
+|Value| Type |
+| --- | ----  |
+|0| Number|
+|NaN (not a number)| Number|
+|'' (empty string) |String|
+|false| Boolean|
+|null| Object|
+|undefined| Undefined|
+
+## hasOwnProperty
+Unfortunately, `hasOwnProperty` is a method, not an operator, so in any object it could be replaced.
+
+## Object
+JavaScript’s objects are never truly empty because they can pick up members from the prototype chain. 
+
+And sometimes that matters.
+
+# Bad Parts
+## ==
+Use always `===` and `!==` instead.
+
+```js
+'' == '0' // false
+0 == '' // true
+0 == '0' // true
+false == 'false' // false
+false == '0' // true
+false == undefined // false
+false == null // false
+null == undefined // true
+' \t\r\n ' == 0 // true
+```
+
+## `with` Statement
+the `with` statement was intended to provide a shorthand when
+accessing the properties of an object.
+
+Unfortunately, its results can sometimes be unpredictable, so it should be avoided.
+
+## `eval`
+The eval function passes a string to the JavaScript compiler and executes the result.
+
+Should be avoided as `setInterval`, `setTimeout` and the Function constructor
+
+## `continue` Statement
+The continue statement jumps to the top of the loop.
+
+## `switch` Fall Through
+The switch statement was modeled after the FORTRAN IV computed go to statement.
+
+Each case falls through into the next case unless you explicitly disrupt the flow
+
+## Block-less Statements
+An if or while or do or for statement can take a block or a single statement.
+
+```js
+if (ok)
+  t = true;
+//can become:
+if (ok)
+  t = true;
+  advance( );
+//which looks like:
+if (ok) {
+  t = true;
+  advance( );
+}
+//but which actually means:
+if (ok) {
+  t = true;
+}
+advance( );
+```
+
+## `++` `--`
+When `++` and `--` are used , the code tended to be too
+tight, too tricky, too cryptic. 
+
+Don’t use them
+
+## Bitwise Operators
+JavaScript has the same set of bitwise operators as Java:
+```js
+& and
+| or
+^ xor
+~ not
+>> signed right shift
+>>> unsigned right shift
+<< left shift
+```
+Bitwise operators convert their number operands into integers, do their business, and then convert them back.
+
+They are slow
+
+## The function Statement Versus the function Expression
+The statement:
+```js
+function foo( ) {}
+```
+means about the same thing as:
+```js
+var foo = function foo( ) {};
+```
+
+`function` statements are subject to _hoisting_. This means that regardless of where a `function` is placed, it is moved to the top of the scope in which it is defined.
+
+The first thing in a statement cannot be a function expression because the official grammar assumes that a statement that starts with the word function is a function statement.
+
+The workaround is to wrap the function expression in parentheses:
+```js
+(function ( ) {
+  var hidden_variable;
+  // This function can have some impact on
+  // the environment, but introduces no new
+  // global variables.
+})(); 
+```
+
+## Typed Wrappers
+JavaScript has a set of typed wrappers. For example:
+
+```js
+new Boolean(false)
+```
+
+Don’t use `new Boolean` or `new Number` or `new String`.
+
+Also avoid `new Object` and `new Array`. Use `{}` and `[]` instead
+
+`new`
+JavaScript’s new operator creates a new object that inherits from the operand’s prototype
+member, and then calls the operand, binding the new object to this. This gives
+the operand (which had better be a constructor function) a chance to customize the
+new object before it is returned to the requestor.
+
+If youforget to use the new operator, youinstead get an ordinary function call, and
+this is bound to the global object instead of to a new object. That means that your
+function will be clobbering global variables when it attempts to initialize the new
+members.
+
+Not use `new` at all.
+
+## `void`
+`void` is an operator that takes an operand and returns `undefined`.
+
+This is not useful, and it is very confusing.
+
+Avoid void.
 
 [block]: http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ad02.png
 [break]: http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ad03.png
