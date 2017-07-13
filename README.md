@@ -1,157 +1,3 @@
-<!-- TOC -->
-
-- [2.Grammar](#2grammar)
-  - [White Space](#white-space)
-  - [Name](#name)
-    - [Reserved Words](#reserved-words)
-      - [Avoid also these ones](#avoid-also-these-ones)
-      - [And these](#and-these)
-  - [Numbers](#numbers)
-  - [Strings](#strings)
-  - [Statements](#statements)
-    - [`var` Statements](#var-statements)
-    - [Statements](#statements-1)
-    - [Disruptive Statements](#disruptive-statements)
-    - [Block](#block)
-    - [If Statement](#if-statement)
-    - [Swith Statements](#swith-statements)
-    - [Case Clause](#case-clause)
-    - [While Statement](#while-statement)
-    - [For Statement](#for-statement)
-    - [Do Statement](#do-statement)
-    - [Try Statement](#try-statement)
-    - [Throw Statement](#throw-statement)
-    - [Return Statement](#return-statement)
-    - [Break Statement](#break-statement)
-    - [Expression Statement](#expression-statement)
-  - [Expressions](#expressions)
-    - [#Operands precedence](#operands-precedence)
-    - [Prefix Operator](#prefix-operator)
-    - [Infix operator](#infix-operator)
-    - [Invoaction](#invoaction)
-    - [Refinement](#refinement)
-  - [Literals](#literals)
-    - [Object Literal](#object-literal)
-    - [Regex Literal](#regex-literal)
-  - [Functions](#functions)
-    - [Function Literal](#function-literal)
-    - [Parameters](#parameters)
-    - [Function body](#function-body)
-- [3.Objects](#3objects)
-  - [Object Literals](#object-literals)
-  - [Retrieval](#retrieval)
-  - [Update](#update)
-  - [Reference](#reference)
-  - [Prototype](#prototype)
-  - [Reflection](#reflection)
-  - [Enumeration](#enumeration)
-  - [Delete](#delete)
-  - [Global Abatement](#global-abatement)
-- [4.Functions](#4functions)
-  - [Function Objects](#function-objects)
-  - [Function Literals](#function-literals)
-  - [Invocation](#invocation)
-    - [The Method Invocation Pattern](#the-method-invocation-pattern)
-    - [The Function Invocation Pattern](#the-function-invocation-pattern)
-    - [The Constructor Invocation Pattern](#the-constructor-invocation-pattern)
-    - [The Apply Invocation Pattern](#the-apply-invocation-pattern)
-    - [Arguments](#arguments)
-  - [Return](#return)
-  - [Exceptions](#exceptions)
-  - [Augmenting Types](#augmenting-types)
-  - [Recursion](#recursion)
-  - [Scope](#scope)
-  - [Closure](#closure)
-  - [Callbacks](#callbacks)
-  - [Module](#module)
-  - [Cascade](#cascade)
-  - [Curry](#curry)
-  - [Memoization](#memoization)
-- [5. Inheritance](#5-inheritance)
-  - [Pseudo Classical](#pseudo-classical)
-  - [Object Specifiers](#object-specifiers)
-  - [Prototypal](#prototypal)
-  - [Functional](#functional)
-      - [Sample](#sample)
-- [6 Arrays](#6-arrays)
-  - [Array Literals](#array-literals)
-  - [Length](#length)
-  - [Delete](#delete-1)
-  - [Enumeration](#enumeration-1)
-  - [Confusion](#confusion)
-  - [Methods](#methods)
-  - [Dimensions](#dimensions)
-- [8. Methods](#8-methods)
-  - [Array](#array)
-    - [`array.concat(item…)`](#arrayconcatitem)
-    - [`array.join(separator)`](#arrayjoinseparator)
-    - [`array.pop( )`](#arraypop-)
-    - [`array.push(item…)`](#arraypushitem)
-    - [`array.reverse( )`](#arrayreverse-)
-    - [`array.shift( )`](#arrayshift-)
-    - [`array.slice(start, end)`](#arrayslicestart-end)
-    - [`array.sort(comparefn)`](#arraysortcomparefn)
-    - [`array.splice(start, deleteCount, item…)`](#arraysplicestart-deletecount-item)
-    - [`array.unshift(item…)`](#arrayunshiftitem)
-  - [Function](#function)
-    - [`function.apply(thisArg, argArray)`](#functionapplythisarg-argarray)
-  - [Number](#number)
-    - [`number.toExponential(fractionDigits)`](#numbertoexponentialfractiondigits)
-    - [`number.toFixed(fractionDigits)`](#numbertofixedfractiondigits)
-    - [`number.toPrecision(precision)`](#numbertoprecisionprecision)
-    - [`number.toString(radix)`](#numbertostringradix)
-  - [Object](#object)
-    - [`object.hasOwnProperty(name)`](#objecthasownpropertyname)
-  - [RegExp](#regexp)
-    - [`regexp.exec(string)`](#regexpexecstring)
-    - [```regexp.test(string)```](#regexpteststring)
-  - [String](#string)
-    - [`string.charAt(pos)`](#stringcharatpos)
-    - [`string.charCodeAt(pos)`](#stringcharcodeatpos)
-    - [`string.concat(string…)`](#stringconcatstring)
-    - [`string.indexOf(searchString, position)`](#stringindexofsearchstring-position)
-    - [`string.lastIndexOf(searchString, position)`](#stringlastindexofsearchstring-position)
-    - [`string.localeCompare(that)`](#stringlocalecomparethat)
-    - [`string.match(regexp)`](#stringmatchregexp)
-    - [`string.replace(searchValue,replaceValue)`](#stringreplacesearchvaluereplacevalue)
-    - [`string.search(regexp)`](#stringsearchregexp)
-    - [`string.slice(start, end)`](#stringslicestart-end)
-    - [`string.split(separator, limit)`](#stringsplitseparator-limit)
-    - [`string.substring(start, end)`](#stringsubstringstart-end)
-    - [`string.toLocaleLowerCase( )`](#stringtolocalelowercase-)
-    - [`string.toLocaleUpperCase( )`](#stringtolocaleuppercase-)
-    - [`string.toLowerCase( )`](#stringtolowercase-)
-    - [`string.toUpperCase( )`](#stringtouppercase-)
-    - [`String.fromCharCode(char…)`](#stringfromcharcodechar)
-- [Awful Parts](#awful-parts)
-  - [Global Variables](#global-variables)
-  - [Scope](#scope-1)
-  - [Semicolon Insertion](#semicolon-insertion)
-  - [Reserved Words](#reserved-words-1)
-  - [Unicode](#unicode)
-  - [typeof](#typeof)
-  - [parseInt](#parseint)
-  - [+](#)
-  - [Floating Point](#floating-point)
-  - [NaN](#nan)
-  - [Phony Arrays](#phony-arrays)
-  - [Falsy Values](#falsy-values)
-  - [hasOwnProperty](#hasownproperty-function hasOwnProperty() { [native code] }1)
-  - [Object](#object-1)
-- [Bad Parts](#bad-parts)
-  - [==](#)
-  - [`with` Statement](#with-statement)
-  - [`eval`](#eval)
-  - [`continue` Statement](#continue-statement)
-  - [`switch` Fall Through](#switch-fall-through)
-  - [Block-less Statements](#block-less-statements)
-  - [`++` `--`](#---)
-  - [Bitwise Operators](#bitwise-operators)
-  - [The function Statement Versus the function Expression](#the-function-statement-versus-the-function-expression)
-  - [Typed Wrappers](#typed-wrappers)
-  - [`void`](#void)
-
-<!-- /TOC -->
 # 2.Grammar
 ## White Space
 ![alt text][space]
@@ -2051,6 +1897,170 @@ Not use `new` at all.
 This is not useful, and it is very confusing.
 
 Avoid void.
+
+# JSLint
+## Undefined Variables and Functions
+JSLint expects that all variables and functions will be declared before they are used or invoked. This allows it to detect implied global variables.
+
+## Members
+Since JavaScript is a loosely typed dynamic-object language, it is not possible to determine at compile time if property names are spelled correctly.
+ 
+JSLint provides some assistance with this.
+
+At the bottom of its report, JSLint displays a `/*members*/` comment. It contains all of the names and string literals that were used with dot notation, subscript notation, and object literals to name the members of objects.
+
+## Options
+| Option | Meaning |
+| -- | -- |
+|adsafe| true if ADsafe.org rules should be enforced|
+|bitwise| true if bitwise operators should not be allowed|
+|browser| true if the standard browser globals should be predefined|
+|cap| true if uppercase HTML should be allowed|
+|debug| true if debugger statements should be allowed|
+|eqeqeq| true if === should be required|
+|evil| true if eval should be allowed|
+|forin| true if unfiltered for in statements should be allowed|
+|fragment| true if HTML fragments should be allowed|
+|glovar| true if var should not be allowed to declare global variables|
+|laxbreak| true if statement breaks should not be checked|
+|nomen| true if names should be checked|
+|on| true if HTML event handlers should be allowed|
+|passfail| true if the scan should stop on first error|
+|plusplus| true if ++ and -- should not be allowed|
+|rhino| true if the Rhino environment globals should be predefined|
+|undef| true if undefined global variables are errors|
+|white| true if strict whitespace rules apply|
+|widget| true if the Yahoo! Widgets globals should be predefined|
+
+## Semicolon
+JSLint expects that every statement be followed by ; except for `for`, `function`, `if`, `switch`, `try`, and `while`.
+
+## Line Breaking
+JSLint expects long statements to be broken only after one of these punctuation characters or operators:
+
+`, . ; : { } ( [ = < > ? ! + - * / % ~ ^ | &
+== != <= >= += -= *= /= %= ^=`
+
+## Comma
+JSLint expects to see the comma used as a separator, but not as an operator
+
+## Required Blocks
+JSLint expects that if and for statements will be made with blocks—that is, with statements enclosed in braces ({}).
+
+## Forbidden Blocks
+JSLint expects blocks with function, if, switch, while, for, do, and try statements and nowhere else.
+
+## Expression Statements
+An expression statement is expected to be an assignment, a function/method call, or delete.
+
+## `for in` Statement
+The body of every `for in` statement should be wrapped in an `if` statement that does filtering.
+
+## `switch` Statement
+JSLint expects that the statement before the next case or `default` is one of these: `break`, `return`, or `throw`.
+
+## var Statement
+JSLint expects that:
+
+* Avar will be declared only once, and that it will be declared before it is used.
+* A function will be declared before it is used.
+* Parameters will not also be declared as vars.
+
+JSLint does not expect:
+
+* The arguments array to be declared as a var.
+* That a variable will be declared in a block. This is because JavaScript blocks do not have block scope.
+
+## with Statement
+Never use the with statement. Use a var instead.
+
+JSLint does not expect to see a with statement.
+
+## `=`
+JSLint does not expect to see an assignment statement in the condition part of an if or while statement. This is because it is more likely that:
+```js if (a = b) {
+  ...
+}
+```
+Use
+```js
+if ((a = b)) {
+  ...
+}
+```
+## `==` and `!=`
+JSLint expects `===` or `!==` operators.
+
+## Labels
+JSLint expects labels only on statements that interact with `break`: `switch`, `while`, `do`, and `for`.
+
+ JSLint expects that labels will be distinct from variables and parameters.
+
+ ## Unreachable Code
+JSLint expects that a `return`, `break`, `continue`, or `throw` statement will be followed by a `}` or `case` or `default`.
+
+## Confusing Pluses and Minuses
+JSLint expects that + will not be followed by + or ++, and that - will not be followed by - or --. 
+
+## ++ and --
+The JSLint option plusplus prohibits the use of these operators.
+
+## Bitwise Operators
+JSLint does not expect bitwise operators.
+
+## `eval` Is Evil
+JSLint does not expect evals.
+
+## `void`
+JSLint does not expect to see void because it is confusing
+and not very useful.
+
+## Regular Expressions
+JSLint looks for problems
+that may cause portability problems. It also attempts to resolve visual ambiguities by recommending explicit escapement.
+JSLint expects that the character preceding a regular expression literal is a `(` or `=` or `:` or `,` character.
+
+## Constructors and new
+JSLint enforces the convention that constructor functions be given names with initial uppercase letters.
+
+JSLint does not expect to see a function invocation with an initial
+uppercase name unless it has the new prefix.
+
+JSLint does not expect to see the new prefix used with functions whose names do not start with initial uppercase.
+
+JSLint does not expect to see the wrapper forms `new Number`, `new String`, or `new Boolean`.
+
+JSLint does not expect to see `new Object` (use `{}` instead).
+
+JSLint does not expect to see `new Array` (use `[]` instead).
+
+## Not Looked For
+JSLint does not chek if variables are assigned values before they are used.
+
+JSLint does not do any kind of global analysis.
+
+## HTML
+JSLint is able to handle HTML text.
+
+## JSON
+JSLint can also check that JSON data structures are well formed.
+
+## Report
+If JSLint is able to complete its scan, it generates a function report. It lists the following
+for each function:
+* The line number on which it starts.
+* Its name. In the case of anonymous functions, JSLint will “guess” the name.
+* The parameters.
+* Closure: the variables and parameters that are declared in the function that are
+used by its inner functions.
+* Variables: the variables declared in the function that are used only by the function.
+* Unused: the variables that are declared in the function that are not used. This
+may be an indication of an error.
+* Outer: variables used by this function that are declared in another function.
+* Global: global variables that are used by this function.
+* Label: statement labels that are used by this function.
+
+The report will also include a list of all of the member names that were used.
 
 [block]: http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ad02.png
 [break]: http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ad03.png
