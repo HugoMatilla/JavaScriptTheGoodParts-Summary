@@ -1,5 +1,12 @@
+This is my summary of the (JavaScript: The Good Parts By Douglas Crockford)[http://shop.oreilly.com/product/9780596517748.do]. I use it while learning and as quick reference. It is not intended to be an standalone substitution of the book so if you really want to learn the concepts here presented, buy and read the book and use this repository as a reference and guide.
+
+If you are the publisher and think this repository should not be public, just write me an email at hugomatilla [at] gmail [dot] com and I will make it private.
+
+Contributions: Issues, comments and pull requests are super welcome 😃
+# 1.Table of Contents
 <!-- TOC -->
 
+- [1.Table of Contents](#1table-of-contents)
 - [2.Grammar](#2grammar)
   - [White Space](#white-space)
   - [Name](#name)
@@ -136,7 +143,7 @@
   - [NaN](#nan)
   - [Phony Arrays](#phony-arrays)
   - [Falsy Values](#falsy-values)
-  - [hasOwnProperty](#hasownproperty-function hasOwnProperty() { [native code] }1)
+  - [`hasOwnProperty`](#hasownproperty)
   - [Object](#object-1)
 - [Bad Parts](#bad-parts)
   - [==](#)
@@ -1942,7 +1949,7 @@ JavaScript has a surprisingly large set of falsy values
 |null| Object|
 |undefined| Undefined|
 
-## hasOwnProperty
+## `hasOwnProperty`
 Unfortunately, `hasOwnProperty` is a method, not an operator, so in any object it could be replaced.
 
 ## Object
