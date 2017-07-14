@@ -2062,6 +2062,56 @@ may be an indication of an error.
 
 The report will also include a list of all of the member names that were used.
 
+# JSON
+## JSON syntax
+JSON has six kinds of values: `objects`, `arrays`, `strings`, `numbers`, `booleans` (`true` and
+`false`), and the special value `null`.
+
+Whitespace (spaces, tabs, carriage returns, and newline characters) may be inserted before or after any value. 
+
+A JSON object is an unordered container of name/value pairs. 
+
+A name can be any string.
+
+A value can be any JSON value, including arrays and objects.
+
+JSON objects can be nested to any depth
+
+The JSON array is an ordered sequence of values.
+
+A value can be any JSON value, including `arrays` and `objects`.
+
+![alt text][json-value]
+
+![alt text][json-object]
+
+![alt text][json-array]
+
+
+A JSON string is wrapped in double quotes. 
+
+The `\` character is used for escapement.
+
+JSON allows the `/` character to be escaped so that JSON can be embedded in HTML `<script>` tags.
+
+HTML does not allow the sequence `</` except to start the `</script>` tag.
+
+JSON allows `<\/`, which produces the same result but does not confuse HTML.
+
+JSON numbers are like JavaScript numbers.
+
+A leading zero is not allowed.
+
+A number can be an integer, real, or scientific.
+
+![alt text][json-string]
+
+![alt text][json-number]
+
+## Using JSON Securely
+Use the `JSON.parse`
+
+
 [block]: http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ad02.png
 [break]: http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ad03.png
 [case]: http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ad04.png
@@ -2098,3 +2148,8 @@ The report will also include a list of all of the member names that were used.
 [while]: http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ad42.png
 
 [regexp1]: http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ad26.png
+[json-value]:http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ae01.png
+[json-object]:http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ae02.png
+[json-array]:http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ae03.png
+[json-string]:http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ae04.png
+[json-number]:http://cdn.oreilly.com/excerpts/9780596517748/web/jsgp_ae05.png
